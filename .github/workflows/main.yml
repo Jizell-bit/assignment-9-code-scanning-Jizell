@@ -30,6 +30,3 @@ jobs:
         with:
           name: trivy-results
           path: trivy-results.sarif
-        with:
-          name: trivy-results
-          path: trivy-results.sarif
