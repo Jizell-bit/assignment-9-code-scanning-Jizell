@@ -63,7 +63,4 @@ jobs:
            name: docker-scout-findings
            path: scout-report.sarif
          
-           name: dock
-           er-scout-findings
-           path: scout-report.sarif
-           
+        
