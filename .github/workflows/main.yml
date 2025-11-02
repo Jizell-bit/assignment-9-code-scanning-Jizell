@@ -1,13 +1,11 @@
-name: build
-on:
-  push:
-    branches:
-      - main
-  pull_request:
+name: CI
+on: [push]
+
 jobs:
   sast_scan:
     name: Run Static Code Scan
     runs-on: ubuntu-20.04
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -17,17 +15,14 @@ jobs:
         env:
           TRIVY_DB_REPOSITORY: public.ecr.aws/aquasecurity/trivy-db:2
         with:
-          scan-type: 'fs'
+          scan-type: fs
           ignore-unfixed: true
-          format: 'sarif'
-          output: 'trivy-results.sarif'
-          severity: 'CRITICAL'
+          format: sarif
+          output: trivy-results.sarif
+          severity: CRITICAL
 
       - name: Upload build artifact
         uses: actions/upload-artifact@v4.4.3
-        with:
-          name: trivy-results
-          path: trivy-results.sarif
         with:
           name: trivy-results
           path: trivy-results.sarif
