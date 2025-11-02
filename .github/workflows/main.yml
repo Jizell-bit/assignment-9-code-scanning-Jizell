@@ -1,10 +1,14 @@
 name: CI
-on: [push]
+on:
+  push:
+    branches:
+      - main
+  pull_request:
 
 jobs:
   sast_scan:
     name: Run Static Code Scan
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
 
     steps:
       - name: Checkout code
@@ -23,6 +27,9 @@ jobs:
 
       - name: Upload build artifact
         uses: actions/upload-artifact@v4.4.3
+        with:
+          name: trivy-results
+          path: trivy-results.sarif
         with:
           name: trivy-results
           path: trivy-results.sarif
